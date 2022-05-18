@@ -3,7 +3,7 @@ var items = [
     id: 1,
     matchWith: 2,
     content:
-      '<img src="./sangue.png" alt="">',
+      '<img src="./images/sangue.png" alt="">',
     title: '<p>Sangue</p>'
   },
   {
@@ -16,7 +16,7 @@ var items = [
     id: 3,
     matchWith: 4,
     content:
-      '<img src="./plasma.png" alt="">',
+      '<img src="./images/plasma.png" alt="">',
     title: '<p>Plasma</p>'
   },
   {
@@ -29,7 +29,7 @@ var items = [
     id: 5,
     matchWith: 6,
     content:
-      '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
+      '<img src="./images/hemácias.png" alt="">',
     title: '<p>Hemácias</p> ou Glóbulos vermelhos'
   },
   {
@@ -42,7 +42,7 @@ var items = [
     id: 7,
     matchWith: 8,
     content:
-      '<img src="./leucócitos.png" alt="">',
+      '<img src="./images/leucócitos.png" alt="">',
     title: '<p>Leucócitos</p> ou Glóbulos brancos'
   },
   {
@@ -68,7 +68,7 @@ var items = [
     id: 11,
     matchWith: 12,
     content:
-      '<img src="./interrogação.png" alt="">',
+      '<img src="./images/interrogação.png" alt="">',
     title: '<p>Curiosidade</p>'
   },
   {
@@ -126,7 +126,7 @@ function isCorrect(evt) {
         tempPreviousElement.style.outlineColor = "#3aa394"
         tempPreviousElement.removeEventListener('click', isCorrect)
         if (acertos == 6) {
-          alert('boa')
+          alerta()
         }
       });
     } else {
@@ -155,5 +155,13 @@ function isCorrect(evt) {
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function alerta() {
+  Swal.fire({
+    title: 'Parabéns!',
+    text: 'Você completou o jogo.',
+    icon: 'success'
+  })
 }
 
