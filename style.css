@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  user-select: none;
 }
 
 body {
@@ -23,8 +24,8 @@ header {
   height: 80px;
 }
 
-header p {  
-  font-size: 3rem;
+header p {
+  font-size: 2rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   color: #fff;
@@ -44,35 +45,41 @@ main {
 }
 
 .card {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
+  outline: solid 5px rgb(76, 67, 71);
+  border-radius: 10px;
 }
 
 .card-face {
   position: absolute;
   height: 100%;
-  width: 100%;  
+  width: 100%;
   backface-visibility: hidden;
-  border-radius: 10px;  
-  outline: solid 5px rgb(76, 67, 71); 
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-align: center;
 }
 
-.card-front { 
+.card-front {
   border-radius: 10px;
 }
 
 .card-back {
-  transform: rotateY( 180deg );
+  transform: rotateY(180deg);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .card-back>img {
-  width: 100%;
+  width: 60%;
   height: fit-content;
 }
 
@@ -81,15 +88,12 @@ main {
 }
 
 .text-content {
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
-  text-align: center;
   padding: 5px;
-  font-weight: 500;
+  font-size: 0.85rem;
 }
 
 .button-container {
-  width: 100%;    
+  width: 100%;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -98,9 +102,18 @@ main {
 }
 
 .button-container button {
-  padding: 20px 50px;
+  padding: 15px 40px;
   background: rgb(76, 67, 71);
   border: none;
   border-radius: 10px;
-  color: #fefefe;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: background 2s;
+}
+
+button:active {
+  background: rgb(76, 67, 71);
 }

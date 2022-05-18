@@ -4,7 +4,7 @@ var items = [
     matchWith: 2,
     content:
       '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
-    title: 'Sangue'
+    title: '<p>Sangue</p>'
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ var items = [
     matchWith: 4,
     content:
       '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
-    title: 'Plasma'
+    title: '<p>Plasma</p>'
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ var items = [
     matchWith: 6,
     content:
       '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
-    title: 'Hemácias ou Glóbulos vermelhos'
+    title: '<p>Hemácias</p> ou Glóbulos vermelhos'
   },
   {
     id: 6,
@@ -43,7 +43,7 @@ var items = [
     matchWith: 8,
     content:
       '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
-    title: 'Leucócitos ou Glóbulos brancos'
+    title: '<p>Leucócitos</p> ou Glóbulos brancos'
   },
   {
     id: 8,
@@ -56,7 +56,7 @@ var items = [
     matchWith: 10,
     content:
       '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
-    title: 'Plaquetas'
+    title: '<p>Plaquetas</p>'
   },
   {
     id: 10,
@@ -69,7 +69,7 @@ var items = [
     matchWith: 12,
     content:
       '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
-    title: 'Curiosidade'
+    title: '<p>Curiosidade</p>'
   },
   {
     id: 12,
@@ -84,67 +84,76 @@ function loadGame() {
   game.innerHTML = ''
   items = items.sort(() => Math.random() - 0.5)
   items.map(value => {
-    if (value.title != undefined) {
-      var content = `
+    var content = `
       <div class='card' id='${value.id}' matchWith='${value.matchWith}'>
         <div class="card-face card-front">
         </div>
         <div class="card-face card-back">
           ${value.content}
-          ${value.title}
+          ${value.title != undefined ? value.title : ""}
         </div>
       </div>
     `
-    } else {
-      var content = `
-      <div class='card' id='${value.id}' matchWith='${value.matchWith}'>
-        <div class="card-face card-front">
-        </div>
-        <div class="card-face card-back">
-          ${value.content}
-        </div>
-      </div>
-      `
-    }
 
     game.innerHTML += content
   })
 
   var card = document.querySelectorAll('.card')
   card.forEach(element => {
-    element.addEventListener('click', () => {
-      isCorrect(element)
-    })
+    element.addEventListener('click', isCorrect)
+    element.elmt = element;
   })
 }
 
 var previous = 0
 var acertos = 0
+var matchWith;
+var previousElement;
+var actualElement;
 
-function isCorrect(element) {
-  actualElement = element
+function isCorrect(evt) {
+  actualElement = evt.currentTarget.elmt
   actualElement.classList.toggle('is-flipped')
+  actualElement.removeEventListener('click', isCorrect)
   if (previous == 1) {
+    let tempActualElement = actualElement;
+    let tempPreviousElement = previousElement;
     var id = actualElement.getAttribute('id')
     if (matchWith == id) {
-      acertos++
-      console.log(acertos)
-      actualElement.removeEventListener('click', () => {
-        isCorrect(element)
-      })
-      previousElement.removeEventListener('click', () => {
-        isCorrect(element)
-      })
+      sleep(1000).then(() => {
+        acertos++
+        tempActualElement.style.outlineColor = "#3aa394"
+        tempPreviousElement.style.outlineColor = "#3aa394"
+        tempPreviousElement.removeEventListener('click', isCorrect)
+        if (acertos == 6) {
+          alert('boa')
+        }
+      });
     } else {
-      console.log(id)
-      console.log(matchWith)
-      actualElement.classList.toggle('is-flipped')
-      previousElement.classList.toggle('is-flipped')
+      sleep(500).then(() => {
+        tempActualElement.style.outlineColor = "#D10000"
+        tempPreviousElement.style.outlineColor = "#D10000"
+        sleep(2500).then(() => {
+          tempActualElement.classList.toggle('is-flipped')
+          tempPreviousElement.classList.toggle('is-flipped')
+          tempActualElement.style.outlineColor = "rgb(76, 67, 71)"
+          tempPreviousElement.style.outlineColor = "rgb(76, 67, 71)"
+          tempActualElement.addEventListener('click', isCorrect)
+          tempPreviousElement.addEventListener('click', isCorrect)
+        });
+      })
+
     }
     previous = 0
   } else {
-    var previousElement = actualElement
-    var matchWith = previousElement.getAttribute('matchWith')
+    previousElement = actualElement
+    matchWith = previousElement.getAttribute('matchWith')
+    actualElement.removeEventListener('click', isCorrect)
     previous = 1
   }
 }
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
