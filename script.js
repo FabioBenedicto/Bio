@@ -86,7 +86,7 @@ function loadGame() {
   items.map(value => {
     if (value.title != undefined) {
       var content = `
-      <div class='card'>
+      <div class='card' id='${value.id}' matchWith='${value.matchWith}'>
         <div class="card-face card-front">
         </div>
         <div class="card-face card-back">
@@ -97,12 +97,8 @@ function loadGame() {
     `
     } else {
       var content = `
-      <div class='card'>
+      <div class='card' id='${value.id}' matchWith='${value.matchWith}'>
         <div class="card-face card-front">
-          <div class="${value.id}" id="id" style="display: none">
-          </div>
-          <div class="${value.matchWith}" id="matchWith" style="display: none">
-          </div>
         </div>
         <div class="card-face card-back">
           ${value.content}
@@ -127,29 +123,28 @@ var acertos = 0
 
 function isCorrect(element) {
   actualElement = element
-  element.classList.toggle('is-flipped')
+  actualElement.classList.toggle('is-flipped')
   if (previous == 1) {
-    var id = getElementById('#id').className
-
-    if (atualelement.matchWith == previousElement.id) {
+    var id = actualElement.getAttribute('id')
+    if (matchWith == id) {
       acertos++
       console.log(acertos)
       actualElement.removeEventListener('click', () => {
         isCorrect(element)
       })
-      previousElement.classList.toggle('click', () => {
+      previousElement.removeEventListener('click', () => {
         isCorrect(element)
       })
-      //precisa travar eles aq
     } else {
+      console.log(id)
+      console.log(matchWith)
       actualElement.classList.toggle('is-flipped')
       previousElement.classList.toggle('is-flipped')
-      previous = 0
     }
-    //se n ele tira o flip
+    previous = 0
   } else {
-    previous = 1
     var previousElement = actualElement
-    var matchWith = getElementById('#matchWith').className
+    var matchWith = previousElement.getAttribute('matchWith')
+    previous = 1
   }
 }
