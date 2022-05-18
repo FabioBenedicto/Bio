@@ -3,7 +3,7 @@ var items = [
     id: 1,
     matchWith: 2,
     content:
-      '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
+      '<img src="./sangue.png" alt="">',
     title: '<p>Sangue</p>'
   },
   {
@@ -16,7 +16,7 @@ var items = [
     id: 3,
     matchWith: 4,
     content:
-      '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
+      '<img src="./plasma.png" alt="">',
     title: '<p>Plasma</p>'
   },
   {
@@ -42,7 +42,7 @@ var items = [
     id: 7,
     matchWith: 8,
     content:
-      '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
+      '<img src="./leucócitos.png" alt="">',
     title: '<p>Leucócitos</p> ou Glóbulos brancos'
   },
   {
@@ -68,7 +68,7 @@ var items = [
     id: 11,
     matchWith: 12,
     content:
-      '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
+      '<img src="./interrogação.png" alt="">',
     title: '<p>Curiosidade</p>'
   },
   {
