@@ -55,7 +55,7 @@ var items = [
     id: 9,
     matchWith: 10,
     content:
-      '<img src="https://www.triadperio.com/wp-content/uploads/2019/10/blood_platelets-02.png" alt="">',
+      '<img src="./images/plaqueta.png" alt="">',
     title: '<p>Plaquetas</p>'
   },
   {
@@ -79,11 +79,28 @@ var items = [
   }
 ]
 
+function shuffle(array) {
+  let currentIndex = array.length, randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
 function loadGame() {
   var game = document.getElementById('scene')
   game.innerHTML = ''
-  items = items.sort(() => Math.random() - 0.5)
-  items.map(value => {
+  shuffle(items).map(value => {
     var content = `
       <div class='card' id='${value.id}' matchWith='${value.matchWith}'>
         <div class="card-face card-front">
